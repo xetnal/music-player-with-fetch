@@ -6,19 +6,19 @@ import { SongList } from "./songList.jsx";
 export const Player = () => {
 	const [songs, setSongs] = useState([
 		{
-			id: 1,
+			id: 0,
 			category: "game",
 			name: "Mario Castle",
 			url: "files/mario/songs/castle.mp3",
 		},
 		{
-			id: 2,
+			id: 1,
 			category: "game",
 			name: "Mario Star",
 			url: "files/mario/songs/hurry-starman.mp3",
 		},
 		{
-			id: 3,
+			id: 2,
 			category: "game",
 			name: "Mario Overworld",
 			url: "files/mario/songs/overworld.mp3",
@@ -52,14 +52,19 @@ export const Player = () => {
 			setCurrentSong(currentSong - 1);
 		}
 	};
+	const playClickedSong = () => {
+		currentSong = setCurrentSong(songs.id);
+		playSong();
+	};
 
 	console.log(isPlaying);
 	return (
 		<div className="playerContainer d-flex justify-content-center flex-column align-items-center">
 			<audio src={songUrl} ref={audioElement}></audio>
 			<div className="playerContainer">
-				<SongList />
+				<SongList songs={songs} onPlay={playClickedSong} />
 				<Controls
+					isPlaying={isPlaying}
 					onBack={() => {
 						previousSong();
 						setIsPlaying(false);

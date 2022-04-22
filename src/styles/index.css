@@ -1,6 +1,7 @@
 body{
     margin: 0;
     padding: 0;
+    
 }
 .playerContainer{
     height: 100vh;
@@ -10,9 +11,12 @@ body{
 
 }
 .songList{
-    height: 90vh;
-    background-color: rgb(36, 34, 34);
+    height: 93vh;
+    background-image: url(https://bourayne-preissl.com/wp-content/uploads/2016/03/dark-grey-texture-abstract-hd-wallpaper-1920x1200-1223.jpg);
+    /* background-color: rgb(36, 34, 34); */
     color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
     
 }
 
@@ -22,6 +26,9 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    background-image: url(https://bourayne-preissl.com/wp-content/uploads/2016/03/dark-grey-texture-abstract-hd-wallpaper-1920x1200-1223.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .line{
     width: 100%;
@@ -29,4 +36,14 @@ body{
 }
 button{
     margin: 3px;
+}
+.theList {
+    color: white;
+    height: 100%;
+}
+.song:hover{
+    background-color: rgb(190, 178, 178, .5);
+}
+.song{
+    margin-top: 10px;
 }
