@@ -10,7 +10,7 @@ import { Player } from "./player.jsx";
 
 export const Controls = ({ onClick, onForward, onBack }) => {
 	return (
-		<div className="playerControls position-fixed bottom">
+		<div className="playerControls ">
 			<button className="skip-btn" onClick={onBack}>
 				<FontAwesomeIcon icon={faBackward} />
 			</button>

@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Controls } from "./controls.jsx";
 import { SongList } from "./songList.jsx";
 
-export const Player = (props) => {
+export const Player = () => {
 	const [songs, setSongs] = useState([
 		{
 			id: 1,
@@ -24,8 +24,10 @@ export const Player = (props) => {
 			url: "files/mario/songs/overworld.mp3",
 		},
 	]);
+	const [currentSong, setCurrentSong] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
-	const songUrl = "https://assets.breatheco.de/apis/sound/" + songs[0].url;
+	const songUrl =
+		"https://assets.breatheco.de/apis/sound/" + songs[currentSong].url;
 	const audioElement = useRef();
 	const playSong = () => {
 		audioElement.current.play();
@@ -35,6 +37,21 @@ export const Player = (props) => {
 		audioElement.current.pause();
 		setIsPlaying(false);
 	};
+	const skipSong = () => {
+		if (currentSong >= 2) {
+			setCurrentSong(0);
+		} else {
+			setCurrentSong(currentSong + 1);
+		}
+		audioElement.current.play();
+	};
+	const previousSong = () => {
+		if (currentSong <= 0) {
+			setCurrentSong(2);
+		} else {
+			setCurrentSong(currentSong - 1);
+		}
+	};
 
 	console.log(isPlaying);
 	return (
@@ -43,8 +60,14 @@ export const Player = (props) => {
 			<div className="playerContainer">
 				<SongList />
 				<Controls
-					onBack={pauseSong}
-					onForward={pauseSong}
+					onBack={() => {
+						previousSong();
+						setIsPlaying(false);
+					}}
+					onForward={() => {
+						skipSong();
+						setIsPlaying(false);
+					}}
 					onClick={() => {
 						if (isPlaying === false) {
 							playSong();
@@ -52,7 +75,6 @@ export const Player = (props) => {
 							pauseSong();
 						}
 					}}
-					className="position-fixed bottom"
 				/>
 			</div>
 		</div>
