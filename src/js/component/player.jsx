@@ -59,7 +59,9 @@ export const Player = () => {
 			setCurrentSong(currentSong - 1);
 		}
 	};
-	const playClickedSong = () => {};
+	// const playClickedSong = () => {
+	// 	setCurrentSong(songs.theSongs.id - 1);
+	// };
 
 	console.log(isPlaying);
 	return (
@@ -69,8 +71,8 @@ export const Player = () => {
 				<SongList
 					setSongs={setSongs}
 					songs={songs}
-					onPlay={() => {
-						playSong();
+					onPlay={(song) => {
+						setCurrentSong(song.id);
 					}}
 				/>
 				<Controls

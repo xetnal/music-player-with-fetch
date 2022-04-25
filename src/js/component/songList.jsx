@@ -16,7 +16,7 @@ export const SongList = ({ songs, onPlay, setSongs }) => {
 				key={index}
 				className={`${toggleSelectedStyle(index)} song`}
 				onClick={() => {
-					onPlay();
+					onPlay(song);
 					toggleSelectedSong(index);
 				}}>
 				{song.name}

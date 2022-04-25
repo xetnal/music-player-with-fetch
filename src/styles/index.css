@@ -42,11 +42,13 @@ button{
     height: 100%;
 }
 .song:hover{
-    background-color: rgb(190, 178, 178, .5);
+    background-color: rgb(190, 178, 178, .3);
 }
 .song{
     margin-top: 10px;
 }
 .selected {
-    background-color: rgba(7, 82, 17, 0.5);
+    background-color: rgba(190, 178, 178);
+    color: rgb(10, 92, 17);
+    font-weight: 600;
 }
