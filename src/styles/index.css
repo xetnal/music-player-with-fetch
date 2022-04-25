@@ -47,3 +47,6 @@ button{
 .song{
     margin-top: 10px;
 }
+.selected {
+    background-color: rgba(7, 82, 17, 0.5);
+}

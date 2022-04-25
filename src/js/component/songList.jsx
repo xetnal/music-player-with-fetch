@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const SongList = ({ songs, onPlay }) => {
-	const songsList = songs.map((song) => {
+export const SongList = ({ songs, onPlay, setSongs }) => {
+	const toggleSelectedSong = (index) => {
+		setSongs({ ...songs, activeSong: songs.theSongs[index] });
+	};
+	const toggleSelectedStyle = (index) => {
+		if (songs.theSongs[index] === songs.activeSong) {
+			return "song selected";
+		} else return `song`;
+	};
+
+	const songsList = songs.theSongs.map((song, index) => {
 		return (
-			<li key={song.id} className="song" onClick={onPlay}>
+			<li
+				key={index}
+				className={`${toggleSelectedStyle(index)} song`}
+				onClick={() => {
+					onPlay();
+					toggleSelectedSong(index);
+				}}>
 				{song.name}
 			</li>
 		);
