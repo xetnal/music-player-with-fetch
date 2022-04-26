@@ -53,6 +53,7 @@ export const Player = () => {
 
 	const [currentSong, setCurrentSong] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
+	const [activeSong, setActiveSong] = useState(null);
 	// const songUrl = `https://assets.breatheco.de/apis/sound/` + ;
 	// const [currentUrl, setCurrentUrl] = useState(
 	// 	`https://assets.breatheco.de/apis/sound/`
@@ -96,8 +97,12 @@ export const Player = () => {
 				<SongList
 					setSongs={setSongs}
 					songs={songs}
-					onPlay={(song) => {
-						setCurrentSong(song.id);
+					currentSong={currentSong}
+					setCurrentSong={setCurrentSong}
+					activeSong={activeSong}
+					setActiveSong={setActiveSong}
+					onPlay={(song, index) => {
+						setCurrentSong(song.id - 1);
 					}}
 				/>
 				<Controls

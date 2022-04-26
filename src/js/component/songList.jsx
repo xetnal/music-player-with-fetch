@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 
-export const SongList = ({ songs, onPlay, setSongs }) => {
-	const toggleSelectedSong = (index) => {
-		setSongs({ ...songs, activeSong: songs[index] });
-	};
-	const toggleSelectedStyle = (index) => {
-		if (songs[index] === songs.activeSong) {
-			return "song selected";
-		} else return `song`;
-	};
+export const SongList = ({
+	songs,
+	onPlay,
+	activeSong,
+	setActiveSong,
+	currentSong,
+	setCurrentSong,
+}) => {
+	// const toggleSelectedSong = (index) => {
+	// 	setSongs({ ...songs, activeSong: songs[index] });
+	// };
+	// const toggleSelectedStyle = (index) => {
+	// 	if (songs[index] === songs.activeSong) {
+	// 		return "song selected";
+	// 	} else return `song`;
+	// };
 
 	const songsList =
 		!!songs &&
@@ -17,9 +24,13 @@ export const SongList = ({ songs, onPlay, setSongs }) => {
 			return (
 				<li
 					key={index}
-					className={`${toggleSelectedStyle(index)} song`}
+					className={
+						"song " + (activeSong === index ? "selected" : "")
+					}
 					onClick={() => {
 						onPlay(song);
+						setActiveSong(index);
+						setCurrentSong(index);
 						// toggleSelectedSong(index);
 					}}>
 					{song.name}
