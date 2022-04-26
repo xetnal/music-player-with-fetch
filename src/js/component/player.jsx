@@ -30,7 +30,7 @@ export const Player = () => {
 	useEffect(() => {
 		getData();
 	}, []);
-	const [songs, setSongs] = useState([]);
+	const [songs, setSongs] = useState(null);
 	const getData = () => {
 		fetch("https://assets.breatheco.de/apis/sound/songs", {
 			method: "GET",
@@ -39,6 +39,7 @@ export const Player = () => {
 			},
 		})
 			.then((response) => {
+				if (response === 404) throw new Error("An error happened!");
 				return response.json();
 			})
 			.then((data) => {
@@ -49,20 +50,23 @@ export const Player = () => {
 				console.error(error.message);
 			});
 	};
-	let theSong = songs[0];
-	console.log(theSong);
+
 	const [currentSong, setCurrentSong] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
-	console.log(songs[1]);
-	const songUrl = `https://assets.breatheco.de/apis/sound/`;
+	// const songUrl = `https://assets.breatheco.de/apis/sound/` + ;
+	// const [currentUrl, setCurrentUrl] = useState(
+	// 	`https://assets.breatheco.de/apis/sound/`
+	// );
 
-	const audioElement = useRef();
+	let audioElement = useRef();
 	const playSong = () => {
-		audioElement.current.play();
+		audioElement.src =
+			`https://assets.breatheco.de/apis/sound/` + songs[currentSong].url;
+		audioElement.play();
 		setIsPlaying(true);
 	};
 	const pauseSong = () => {
-		audioElement.current.pause();
+		audioElement.pause();
 		setIsPlaying(false);
 	};
 	const skipSong = () => {
@@ -71,7 +75,7 @@ export const Player = () => {
 		} else {
 			setCurrentSong(currentSong + 1);
 		}
-		audioElement.current.play();
+		// playSong();
 	};
 	const previousSong = () => {
 		if (currentSong <= 0) {
@@ -87,13 +91,13 @@ export const Player = () => {
 	console.log(isPlaying);
 	return (
 		<div className="playerContainer d-flex justify-content-center flex-column align-items-center">
-			<audio src={songUrl} ref={audioElement}></audio>
+			<audio ref={(t) => (audioElement = t)}></audio>
 			<div className="playerContainer">
 				<SongList
 					setSongs={setSongs}
 					songs={songs}
 					onPlay={(song) => {
-						setCurrentSong(song.id);
+						setCurrentSong(song.id - 1);
 					}}
 				/>
 				<Controls
@@ -104,6 +108,7 @@ export const Player = () => {
 					}}
 					onForward={() => {
 						skipSong();
+
 						setIsPlaying(false);
 					}}
 					onClick={() => {
