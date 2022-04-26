@@ -97,7 +97,7 @@ export const Player = () => {
 					setSongs={setSongs}
 					songs={songs}
 					onPlay={(song) => {
-						setCurrentSong(song.id - 1);
+						setCurrentSong(song.id);
 					}}
 				/>
 				<Controls
